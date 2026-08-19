@@ -38,7 +38,7 @@ def get_engine():
     cfg = get_db_config()
     ssl_params = ""
     if cfg.get("ssl_verify_cert"):
-        ssl_params = "?ssl_verify_cert=true&ssl_verify_identity=true"
+        ssl_params = "&ssl_verify_cert=true&ssl_verify_identity=true"
     url = f"mysql+pymysql://{cfg['user']}:{cfg['password']}@{cfg['host']}:{cfg['port']}/{cfg['database']}?charset={cfg['charset']}{ssl_params}"
     return create_engine(url, pool_recycle=3600, pool_pre_ping=True)
 @st.cache_data(ttl=300)
@@ -716,7 +716,7 @@ def main():
     st.markdown("---")
     render_growth_trend(df, filters['granularity'])
     tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
-        "🚀 入职成长曲线",
+        "🚀 成长曲线",
         "📅 周度成长汇总",
         "🏆 新人成长排名",
         "👤 运营成长",
